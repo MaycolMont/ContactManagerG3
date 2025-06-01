@@ -12,6 +12,7 @@
       fx:controller="com.group3.controller.HomeController">
    <children>
       <Label text="Home" />
+      <VBox fx:id="contactsContainer"></VBox>
       <Button fx:id="addContactViewButton" text="+" onAction="#switchToAddContact"/>
    </children>
    <padding>

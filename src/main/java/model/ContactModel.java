@@ -44,10 +44,7 @@ public class ContactModel {
         }
     }
     
-    public static void main(String[] args) {
-        ContactModel newContact = new ContactModel.Builder()
-                .setName("Maycol")
-                .setNumber("09304932")
-                .build();
+    public String getName() {
+        return this.name;
     }
 }
