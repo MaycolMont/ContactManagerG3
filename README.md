@@ -1,1 +1,1 @@
-#M ESSAGE
+#MESSAGE
