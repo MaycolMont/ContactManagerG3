@@ -10,7 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import java.util.Optional;
+import javafx.scene.control.Label;
+import model.ContactModel;
+import dao.ContactService;
 
+// Move this class to util
 class ConfirmDialog {
 
     public static boolean show(String title, String message) {
@@ -24,15 +28,24 @@ class ConfirmDialog {
     }
 }
 
-
 /**
  *
  * @author maycmont
  */
 public class ContactController {
+    private ContactModel contact;
     
     @FXML
-    private void swithToHome() throws IOException {
+    private Label nameLabel;
+    
+    @FXML
+    private void initialize() {
+        contact = ContactService.getContact();
+        setContactLayout();
+    }
+    
+    @FXML
+    private void switchToHome() throws IOException {
         App.setRoot("homeView");
     }
     
@@ -47,6 +60,12 @@ public class ContactController {
         boolean confirmed = ConfirmDialog.show("Ventana de confirmación", 
                 "¿Estás seguro que quieres eliminar este contacto?");
         
-        if (confirmed)swithToHome();
+        if (confirmed)switchToHome();
+    }
+    
+    public void setContactLayout() {
+        // TODO
+        // create labels 
+        nameLabel.setText(contact.getName());
     }
 }

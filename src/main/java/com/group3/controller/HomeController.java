@@ -25,13 +25,27 @@ public class HomeController {
         App.setRoot("addContactView");
     }
     
+    private void switchToContact(ContactModel contact) throws IOException {
+        ContactService.setContact(contact);
+        App.setRoot("contactView");
+    }
+    
     private void addContactLabels() {
         contactsContainer.getChildren().clear();
         
         List<ContactModel> contactsList = ContactService.getAll();
-        for (ContactModel contacModel : contactsList) {
-            String contactName = contacModel.getName();
+        for (ContactModel contactModel : contactsList) {
+            final String contactName = contactModel.getName();
             Label label = new Label(contactName);
+            label.setOnMouseClicked(e -> {
+                try {
+                    switchToContact(contactModel);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
+            label.setStyle("-fx-padding: 8 0 8 0; -fx-font-size: 14px; -fx-cursor: hand;");
+
             contactsContainer.getChildren().add(label);
         }
     }

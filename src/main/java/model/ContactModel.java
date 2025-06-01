@@ -8,6 +8,11 @@ package model;
  *
  * @author maycmont
  */
+
+// Implements Comparable
+// Set comparable criteria
+// Add missing attributes
+// Define getters
 public class ContactModel {
     private String name;
     private String number;
