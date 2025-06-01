@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.group3.controller.AddContactController">
    <children>
       <VBox layoutX="61.0" layoutY="210.0" prefHeight="307.0" prefWidth="238.0">
          <children>
@@ -19,6 +20,6 @@
          </children>
       </VBox>
       <Button fx:id="btnAddContact" layoutX="125.0" layoutY="517.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="110.0" text="Add Contact" />
-      <Button fx:id="btnExitContact" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Exit" />
+      <Button fx:id="btnExitContact" onAction="#switchToHome" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Exit" />
    </children>
 </AnchorPane>
