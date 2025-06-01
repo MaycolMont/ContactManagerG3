@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group3.contactmanagerg3.SecondaryController">
-    <children>
-        <Label text="Secondary View" />
-        <Button fx:id="secondaryButton" text="Switch to Primary View" onAction="#switchToPrimary" />
-    </children>
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="61.0" layoutY="210.0" prefHeight="307.0" prefWidth="238.0">
+         <children>
+            <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="239.0" text="Name Contact" textAlignment="CENTER" />
+            <TextField fx:id="txtAddName" alignment="TOP_CENTER" prefHeight="25.0" prefWidth="180.0" promptText="Add name" />
+            <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="254.0" text="Number Contact" />
+            <TextField fx:id="txtAddNumber" alignment="TOP_CENTER" promptText="Add number" />
+            <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="292.0" text="Email" />
+            <TextField fx:id="txtAddEmail" alignment="TOP_CENTER" promptText="Add email" />
+         </children>
+      </VBox>
+      <Button fx:id="btnAddContact" layoutX="125.0" layoutY="517.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="110.0" text="Add Contact" />
+      <Button fx:id="btnExitContact" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Exit" />
+   </children>
+</AnchorPane>
