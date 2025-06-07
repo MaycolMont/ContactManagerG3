@@ -22,6 +22,7 @@ public class HomeController {
 
     @FXML
     private void switchToAddContact() throws IOException {
+        ContactService.setContact(null);
         App.setRoot("addContactView");
     }
     
@@ -37,6 +38,7 @@ public class HomeController {
         for (ContactModel contactModel : contactsList) {
             final String contactName = contactModel.getName();
             Label label = new Label(contactName);
+            label.getStyleClass().add("contact-item");
             label.setOnMouseClicked(e -> {
                 try {
                     switchToContact(contactModel);
