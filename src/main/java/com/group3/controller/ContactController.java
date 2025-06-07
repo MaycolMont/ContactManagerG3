@@ -11,8 +11,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import java.util.Optional;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import model.ContactModel;
 import dao.ContactService;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.net.URL;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 // Move this class to util
 class ConfirmDialog {
@@ -36,7 +42,13 @@ public class ContactController {
     private ContactModel contact;
     
     @FXML
+    private ImageView profileImage;
+    
+    @FXML
     private Label nameLabel;
+
+    @FXML
+    private VBox attributesBox;
     
     @FXML
     private void initialize() {
@@ -50,6 +62,11 @@ public class ContactController {
     }
     
     @FXML
+    private void favorite() {
+        
+    }
+    
+    @FXML
     private void edit() throws IOException {
         App.setRoot("addContactView");
     }
@@ -59,13 +76,44 @@ public class ContactController {
         // if user confirm, then delete from the user from data and return to Home
         boolean confirmed = ConfirmDialog.show("Ventana de confirmación", 
                 "¿Estás seguro que quieres eliminar este contacto?");
-        
+    
         if (confirmed)switchToHome();
     }
     
     public void setContactLayout() {
-        // TODO
-        // create labels 
         nameLabel.setText(contact.getName());
+        setImageContact();
+
+        // Add attributes to the VBox
+        attributesBox.getChildren().clear();
+
+        contact.getAttributes().forEach((key, value) -> {
+            if (value == null || value.isEmpty()) {
+                return; // Skip empty attributes
+            }
+            
+            Label label = new Label(key + ": " + value);
+
+            label.getStyleClass().add("attribute-label");
+
+            attributesBox.getChildren().add(label);
+        });
+    }
+    
+    public void setImageContact() {
+        String imagePath = contact.getImagePath();
+        if (imagePath == null) {
+            URL defaultUrl = getClass().getResource("/images/default-profile.png");
+            if (defaultUrl != null) {
+                profileImage.setImage(new Image(defaultUrl.toString()));
+            }
+        } else {
+            try {
+                Image img = new Image(new FileInputStream("images/" + imagePath));
+                profileImage.setImage(img);
+            } catch(FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 }

@@ -1,25 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.Circle?>
 
-<VBox alignment="CENTER" 
-      spacing="20.0" 
-      xmlns="http://javafx.com/javafx/8.0.171" 
-      xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="com.group3.controller.ContactController">
-   <children>
-        <Button fx:id="returnBtn" text="Regresar" onAction="#switchToHome"/>
-        <Button fx:id="editBtn" text="Editar" onAction="#edit"/>
-        <Button fx:id="deleteBtn" text="Eliminar" onAction="#delete"/>
-   </children>
-   <children>
-        <Label text="Nombre: " />
-        <Label fx:id="nameLabel"/>
-   </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-</VBox>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.group3.controller.ContactController"
+            fx:id="contactView"
+            stylesheets="@styles.css">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox fx:id="topBar" spacing="10" alignment="CENTER_LEFT">
+            <Button fx:id="returnBtn" text="←" onAction="#switchToHome" styleClass="icon-button"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button fx:id="editBtn" text="✎" onAction="#edit" styleClass="icon-button"/>
+            <Button fx:id="favoriteBtn" text="F" onAction="#favorite" styleClass="icon-button"/>
+            <Button fx:id="deleteBtn" text="🗑" onAction="#delete" styleClass="icon-button"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <VBox fx:id="contentBox" alignment="TOP_CENTER" spacing="15">
+            <!-- Profile Circle or Image -->
+            <StackPane fx:id="profileImageContainer">
+                <ImageView fx:id="profileImage" fitWidth="80" fitHeight="80" styleClass="profile-image">
+                    <clip>
+                        <Circle centerX="40" centerY="40" radius="40"/>
+                    </clip>
+                </ImageView>
+            </StackPane>
+
+            <!-- Name -->
+            <Label fx:id="nameLabel" text="User Name" styleClass="contact-name"/>
+
+            <!-- Attributes -->
+            <VBox fx:id="attributesBox" spacing="10">
+                <!-- Repeated in controller -->
+            </VBox>
+        </VBox>
+    </center>
+
+</BorderPane>
+

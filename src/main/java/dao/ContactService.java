@@ -30,7 +30,7 @@ public class ContactService {
     }
     
     // Implement
-    public static boolean update() {
+    public static boolean update(ContactModel contact) {
         return false;
     }
     
@@ -50,6 +50,8 @@ public class ContactService {
         for (String name : names) {
             ContactModel contact = new ContactModel.Builder()
                     .setName(name)
+                    .setNumber("349034")
+                    .setEmail("ksljdf@gmail.com")
                     .build();
             contacts.add(contact);
         }

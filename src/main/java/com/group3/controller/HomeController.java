@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import java.util.List;
 
 import dao.ContactService;
+import javafx.geometry.Pos;
+import javafx.scene.layout.Priority;
 import model.ContactModel;
 
 public class HomeController {
@@ -26,6 +28,12 @@ public class HomeController {
         App.setRoot("addContactView");
     }
     
+    @FXML
+    private void search() {
+        System.out.println("Search Done");
+    }
+    
+    @FXML   
     private void switchToContact(ContactModel contact) throws IOException {
         ContactService.setContact(contact);
         App.setRoot("contactView");
@@ -39,6 +47,12 @@ public class HomeController {
             final String contactName = contactModel.getName();
             Label label = new Label(contactName);
             label.getStyleClass().add("contact-item");
+            
+            label.setMaxWidth(Double.MAX_VALUE);
+            label.setAlignment(Pos.CENTER_LEFT);
+            
+            VBox.setVgrow(label, Priority.NEVER);
+            
             label.setOnMouseClicked(e -> {
                 try {
                     switchToContact(contactModel);
@@ -46,7 +60,6 @@ public class HomeController {
                     ex.printStackTrace();
                 }
             });
-            label.setStyle("-fx-padding: 8 0 8 0; -fx-font-size: 14px; -fx-cursor: hand;");
 
             contactsContainer.getChildren().add(label);
         }
