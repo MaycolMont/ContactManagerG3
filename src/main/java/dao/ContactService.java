@@ -4,7 +4,6 @@
  */
 package dao;
 
-import java.util.List;
 import model.ContactModel;
 import util.DoubleLinkedCircularList;
 
@@ -16,10 +15,10 @@ import util.DoubleLinkedCircularList;
 // Define filter methods
 public class ContactService {
     private static ContactModel currentContact;
+    private static DoubleLinkedCircularList<ContactModel> contactsList = new DoubleLinkedCircularList<>();
 
     public static DoubleLinkedCircularList<ContactModel> getAll() {
-        String[] names = {"Maycol", "William", "Victor", "Carla"};
-        return mockContacts(names);
+        return contactsList;
     }
 
     //Implement
@@ -31,33 +30,25 @@ public class ContactService {
     // Implement
     public static boolean update(ContactModel contact) {
         // update to dabase, then to the circular list
+        
         return false;
     }
 
     // Implement
     public static boolean delete(ContactModel contact) {
         // first try to delete from database, then from circular list
+        
         return false;
     }
 
     //Implement
     public static boolean add(ContactModel contact) {
         // first add to database, then to the circular list
-        return false;
-    }
-
-    // temporal method
-    static DoubleLinkedCircularList<ContactModel> mockContacts(String[] names){
-        DoubleLinkedCircularList<ContactModel> contacts = new DoubleLinkedCircularList<>();
-        for (String name : names) {
-            ContactModel contact = new ContactModel.Builder()
-                    .setName(name)
-                    .setNumber("349034")
-                    .setEmail("ksljdf@gmail.com")
-                    .build();
-            contacts.add(contact);
+        if (contact != null) {
+            contactsList.add(contact);
+            return true;
         }
-        return contacts;
+        return false;
     }
 
     public static void setContact(ContactModel contact) {

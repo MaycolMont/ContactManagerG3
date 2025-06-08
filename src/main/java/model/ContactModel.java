@@ -82,6 +82,14 @@ public class ContactModel {
     
     // these attributes are required to be set
     public String getName() {return this.name;}
+
+    public String getNumber() {return this.number;}
+
+    public String getEmail() {return this.email;}
+
+    public String getDirection(){return this.direction;}
+
+    public String getBirthayDate(){return this.birthdayDate;}
     
     public String getImagePath() {return this.imagePath;}
     
@@ -94,5 +102,9 @@ public class ContactModel {
         attributes.put("Direction", this.direction);
         attributes.put("Birthday Date", this.birthdayDate);
         return attributes;
+    }
+
+    public String getBirthdayDate() {
+        return birthdayDate;
     }
 }
