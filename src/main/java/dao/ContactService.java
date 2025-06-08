@@ -4,7 +4,6 @@
  */
 package dao;
 
-import java.util.List;
 import model.ContactModel;
 import util.DoubleLinkedCircularList;
 
@@ -19,8 +18,6 @@ public class ContactService {
     private static DoubleLinkedCircularList<ContactModel> contactsList = new DoubleLinkedCircularList<>();
 
     public static DoubleLinkedCircularList<ContactModel> getAll() {
-        //String[] names = {"Maycol", "William", "Victor", "Carla"};
-        //return mockContacts(names);
         return contactsList;
     }
 
@@ -49,31 +46,13 @@ public class ContactService {
         // first add to database, then to the circular list
         if (contact != null) {
             contactsList.add(contact);
-        return true;
+            return true;
         }
         return false;
     }
 
-    // temporal method
-    static DoubleLinkedCircularList<ContactModel> mockContacts(String[] names){
-        DoubleLinkedCircularList<ContactModel> contacts = new DoubleLinkedCircularList<>();
-        for (String name : names) {
-            ContactModel contact = new ContactModel.Builder()
-                    .setName(name)
-                    .setNumber("349034")
-                    .setEmail("ksljdf@gmail.com")
-                    .build();
-            contacts.add(contact);
-        }
-        return contacts;
-    }
-
-    
-
     public static void setContact(ContactModel contact) {
         currentContact = contact;
-
-
     }
 
     public static ContactModel getContact() {

@@ -4,9 +4,8 @@
  */
 package util;
 
-import java.lang.Iterable;
 import java.util.NoSuchElementException;
-import java.util.ListIterator;
+import java.util.Iterator;
 
 /**
  *
@@ -60,11 +59,11 @@ public class DoubleLinkedCircularList<T> implements Iterable<T>{
     public boolean isEmpty() {return size == 0;}
 
     @Override 
-    public ListIterator<T> iterator() {
+    public Iterator<T> iterator() {
         return new DLLListIterator();
     }
 
-    private class DLLListIterator implements ListIterator<T> {
+    private class DLLListIterator implements Iterator<T> {
         private Node<T> current = head;
         private boolean started = false;
 
@@ -82,40 +81,21 @@ public class DoubleLinkedCircularList<T> implements Iterable<T>{
                 return data;
             }
             throw new NoSuchElementException();
-            
         }
-
-        @Override
-        public boolean hasPrevious() {
-            if (current == head) {return false;}
-            return true;
+        
+        public T getNext() {
+            T data = current.next.data;
+            current = current.next;
+            return data;
         }
-
-        @Override
-        public T previous() {
-            if (hasPrevious()) {
-                T data = current.data;
-                current = current.prev;
-                return data;
-            }
-            throw new NoSuchElementException();
+        
+        public T getPrev() {
+            T data = current.prev.data;
+            current = current.prev;
+            return data;
         }
-
-        @Override
-        public int nextIndex() {throw new UnsupportedOperationException("Unimplemented method 'nextIndex'");}
-
-        @Override
-        public int previousIndex() {throw new UnsupportedOperationException("Unimplemented method 'previousIndex'");}
 
         @Override
         public void remove() {throw new UnsupportedOperationException("Unimplemented method 'remove'");}
-
-        @Override
-        public void set(T e) {
-            current.data = e;
-        }
-
-        @Override
-        public void add(T e) {throw new UnsupportedOperationException("Unimplemented method 'add'");}
     }
 }
