@@ -12,10 +12,6 @@ import java.util.LinkedHashMap;
  * @author maycmont
  */
 
-// Implements Comparable
-// Set comparable criteria
-// Add missing attributes
-// Define getters
 public class ContactModel {
     private String name;
     private String number;

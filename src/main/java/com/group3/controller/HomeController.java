@@ -2,16 +2,16 @@ package com.group3.controller;
 
 import com.group3.contactmanagerg3.*;
 import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.control.Label;
-
-import java.util.List;
+import javafx.geometry.Pos;
 
 import dao.ContactService;
-import javafx.geometry.Pos;
-import javafx.scene.layout.Priority;
 import model.ContactModel;
+import util.DoubleLinkedCircularList;
 
 public class HomeController {
     @FXML
@@ -42,7 +42,7 @@ public class HomeController {
     private void addContactLabels() {
         contactsContainer.getChildren().clear();
         
-        List<ContactModel> contactsList = ContactService.getAll();
+        DoubleLinkedCircularList<ContactModel> contactsList = ContactService.getAll();
         for (ContactModel contactModel : contactsList) {
             final String contactName = contactModel.getName();
             Label label = new Label(contactName);
