@@ -40,7 +40,7 @@ public class ContactService {
     // Implement
     public static boolean delete(ContactModel contact) {
         // first try to delete from database, then from circular list
-
+        
         return false;
     }
 
