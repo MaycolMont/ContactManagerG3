@@ -16,10 +16,12 @@ import util.DoubleLinkedCircularList;
 // Define filter methods
 public class ContactService {
     private static ContactModel currentContact;
+    private static DoubleLinkedCircularList<ContactModel> contactsList = new DoubleLinkedCircularList<>();
 
     public static DoubleLinkedCircularList<ContactModel> getAll() {
-        String[] names = {"Maycol", "William", "Victor", "Carla"};
-        return mockContacts(names);
+        //String[] names = {"Maycol", "William", "Victor", "Carla"};
+        //return mockContacts(names);
+        return contactsList;
     }
 
     //Implement
@@ -31,18 +33,24 @@ public class ContactService {
     // Implement
     public static boolean update(ContactModel contact) {
         // update to dabase, then to the circular list
+        
         return false;
     }
 
     // Implement
     public static boolean delete(ContactModel contact) {
         // first try to delete from database, then from circular list
+
         return false;
     }
 
     //Implement
     public static boolean add(ContactModel contact) {
         // first add to database, then to the circular list
+        if (contact != null) {
+            contactsList.add(contact);
+        return true;
+        }
         return false;
     }
 
@@ -60,8 +68,12 @@ public class ContactService {
         return contacts;
     }
 
+    
+
     public static void setContact(ContactModel contact) {
         currentContact = contact;
+
+
     }
 
     public static ContactModel getContact() {

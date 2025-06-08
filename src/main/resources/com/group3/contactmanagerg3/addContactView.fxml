@@ -12,14 +12,14 @@
       <VBox layoutX="61.0" layoutY="210.0" prefHeight="307.0" prefWidth="238.0">
          <children>
             <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="239.0" text="Name Contact" textAlignment="CENTER" />
-            <TextField fx:id="txtAddName" alignment="TOP_CENTER" prefHeight="25.0" prefWidth="180.0" promptText="Add name" />
+            <TextField fx:id="nameField" alignment="TOP_CENTER" prefHeight="25.0" prefWidth="180.0" promptText="Add name" />
             <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="254.0" text="Number Contact" />
-            <TextField fx:id="txtAddNumber" alignment="TOP_CENTER" promptText="Add number" />
+            <TextField fx:id="phoneField" alignment="TOP_CENTER" promptText="Add number" />
             <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="292.0" text="Email" />
-            <TextField fx:id="txtAddEmail" alignment="TOP_CENTER" promptText="Add email" />
+            <TextField fx:id="emailField" alignment="TOP_CENTER" promptText="Add email" />
          </children>
       </VBox>
-      <Button fx:id="btnAddContact" layoutX="125.0" layoutY="517.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="110.0" text="Add Contact" />
-      <Button fx:id="btnExitContact" onAction="#switchToHome" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Exit" />
+      <Button fx:id="saveButton" onAction= "#handleSave" layoutX="125.0" layoutY="517.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="110.0" text="Add Contact" />
+      <Button fx:id="exitButton" onAction="#switchToHome" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Exit" />
    </children>
 </AnchorPane>
