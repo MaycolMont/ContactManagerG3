@@ -6,31 +6,25 @@ package model;
 
 import java.util.Map;
 import java.util.LinkedHashMap;
-import java.time.LocalDate;
 
 /**
  *
  * @author maycmont
  */
 
-public class ContactModel {
+public class CompanyContactModel {
     private String name;
     private String number;
     private String email;
     private String imagePath;
-    private String direction;
-    private boolean isFavorite;
-    private LocalDate birthdayDate;
-    private LocalDate creationDate = LocalDate.now(); // Default to current date
-    
-    private ContactModel(Builder builder) {
+    private String address;
+
+    private CompanyContactModel(Builder builder) {
         this.name = builder.name;
         this.number = builder.number;
         this.email = builder.email;
         this.imagePath = builder.imagePath;
-        this.direction = builder.direction;
-        this.isFavorite = builder.favorite;
-        this.birthdayDate = builder.birthdayDate;
+        this.address = builder.address;
     }
      
     public static class Builder {
@@ -38,9 +32,7 @@ public class ContactModel {
         private String number;
         private String email;
         private String imagePath;
-        private String direction;
-        private boolean favorite;
-        private LocalDate birthdayDate;
+        private String address;
         
         public Builder setName(String name) {
             this.name = name;
@@ -62,50 +54,31 @@ public class ContactModel {
             return this;
         }
 
-        public Builder setDirection(String direction) {
-            this.direction = direction;
+        public Builder setAddress(String address) {
+            this.address = address;
             return this;
         }
 
-        public Builder setFavorite(boolean favorite) {
-            this.favorite = favorite;
-            return this;
-        }
-
-        public Builder setBirthdayDate(LocalDate birthdayDate) {
-            this.birthdayDate = birthdayDate;
-            return this;
-        }
-        
-        public ContactModel build() {
-            return new ContactModel(this);
+        public CompanyContactModel build() {
+            return new CompanyContactModel(this);
         }
     }
     
-    // these attributes are required to be set
     public String getName() {return this.name;}
 
     public String getNumber() {return this.number;}
 
     public String getEmail() {return this.email;}
 
-    public String getDirection(){return this.direction;}
-
-    public LocalDate getBirthdayDate(){return this.birthdayDate;}
+    public String getAddress(){return this.address;}
 
     public String getImagePath() {return this.imagePath;}
-    
-    public boolean isFavorite() {return isFavorite;}
-
-    public LocalDate getCreationDate() {return creationDate;}
 
     public Map<String, String> getAttributes() {
         Map<String, String> attributes = new LinkedHashMap<>();
         attributes.put("Phone", this.number);
         attributes.put("Email", this.email);
-        attributes.put("Direction", this.direction);
-        attributes.put("Birthday Date", this.birthdayDate.toString());
-        attributes.put("Creation Date", this.creationDate.toString());
+        attributes.put("Address", this.address);
         return attributes;
     }
 }
