@@ -11,7 +11,7 @@ import javafx.geometry.Pos;
 
 import dao.ContactService;
 import model.ContactModel;
-import util.DoubleLinkedCircularList;
+import util.DataStructures.DoubleLinkedCircularList;
 
 public class HomeController {
     @FXML
@@ -30,7 +30,7 @@ public class HomeController {
     
     @FXML
     private void search() {
-        System.out.println("Search Done");
+        
     }
     
     @FXML   
@@ -42,9 +42,9 @@ public class HomeController {
     private void addContactLabels() {
         contactsContainer.getChildren().clear();
         
-        DoubleLinkedCircularList<ContactModel> contactsList = ContactService.getAll();
-        for (ContactModel contactModel : contactsList) {
-            final String contactName = contactModel.getName();
+        DoubleLinkedCircularList<ContactModel> contactList = ContactService.getAll();
+        for (ContactModel contactModel : contactList) {
+            String contactName = contactModel.getName();
             Label label = new Label(contactName);
             label.getStyleClass().add("contact-item");
             
@@ -57,7 +57,7 @@ public class HomeController {
                 try {
                     switchToContact(contactModel);
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    System.out.println(ex.getMessage());
                 }
             });
 

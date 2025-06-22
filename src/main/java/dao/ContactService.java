@@ -5,27 +5,21 @@
 package dao;
 
 import model.ContactModel;
-import util.DoubleLinkedCircularList;
+import util.DataStructures.DoubleLinkedCircularList;
+import util.DataStructures.MyArrayList;
 
 /**
  *
  * @author maycmont
  */
 
-// Define filter methods
 public class ContactService {
     private static ContactModel currentContact;
-    private static DoubleLinkedCircularList<ContactModel> contactsList = new DoubleLinkedCircularList<>();
+    private static DoubleLinkedCircularList<ContactModel> contactList = new DoubleLinkedCircularList<>();
+    private static MyArrayList<String> numberList = new MyArrayList<>();
+    private static MyArrayList<String> emailList = new MyArrayList<>();
 
-    public static DoubleLinkedCircularList<ContactModel> getAll() {
-        return contactsList;
-    }
-
-    //Implement
-    public static DoubleLinkedCircularList<ContactModel> getByName() {
-        DoubleLinkedCircularList<ContactModel> contactsList = new DoubleLinkedCircularList<>();
-        return contactsList;
-    }
+    public static DoubleLinkedCircularList<ContactModel> getAll() {return contactList;}
 
     // Implement
     public static boolean update(ContactModel contact) {
@@ -41,21 +35,20 @@ public class ContactService {
         return false;
     }
 
-    //Implement
-    public static boolean add(ContactModel contact) {
+    public static void add(ContactModel contact) {
         // first add to database, then to the circular list
         if (contact != null) {
-            contactsList.add(contact);
-            return true;
+            contactList.add(contact);
+            numberList.add(contact.getNumber());
+            emailList.add(contact.getEmail());
         }
-        return false;
     }
 
-    public static void setContact(ContactModel contact) {
-        currentContact = contact;
-    }
+    public static void setContact(ContactModel contact) {currentContact = contact;}
 
-    public static ContactModel getContact() {
-        return currentContact;
-    }
+    public static ContactModel getContact() {return currentContact;}
+    
+    public static boolean numberExists(String number) {return numberList.contains(number);}
+    
+    public static boolean emailExists(String email) {return emailList.contains(email);}
 }
