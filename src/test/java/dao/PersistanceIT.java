@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package com.group3.controller;
+package dao;
 
+import model.ContactModel;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author maycmont
  */
-public class AddContactControllerTest {
+public class PersistanceIT {
     
-    public AddContactControllerTest() {
+    public PersistanceIT() {
     }
     
     @BeforeClass
@@ -36,8 +37,8 @@ public class AddContactControllerTest {
     public void tearDown() {
     }
 
-    @Test
-    public void testSomeMethod() {
-    }
+    /**
+     * Test of guardarContacto method, of class Persistance.
+     */
     
 }

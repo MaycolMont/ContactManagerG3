@@ -12,9 +12,9 @@ import util.validator.FormatValidator;
 import util.DataStructures.MyArrayList;
 
 public class AddContactController {
-    boolean test = true;
-    MyArrayList<FormatValidator> validators = new MyArrayList<>( );
-    
+    boolean editMode = false;
+    MyArrayList<FormatValidator> validators;
+
     @FXML
     private TextField nameField;
     @FXML
@@ -34,8 +34,7 @@ public class AddContactController {
         try {
             validateInputs();
         } catch (IllegalArgumentException e) {
-            String message = e.getMessage();
-            System.out.println(message);
+            e.printStackTrace();
             return;
         }
         
@@ -46,7 +45,17 @@ public class AddContactController {
             birthday = LocalDate.parse(birthdayField.getText());
         }
         
-        ContactModel contact = new ContactModel.Builder()
+        ContactModel contact;
+        if (editMode) {
+            contact = ContactService.getContact();
+            contact.setName(nameField.getText());
+            contact.setEmail(emailField.getText());
+            contact.setNumber(phoneField.getText());
+            contact.setDirection(directionField.getText());
+            contact.setBirthdayDate(birthday);
+            ContactService.update();
+        } else {
+            contact = new ContactModel.Builder()
                 .setName(nameField.getText())
                 .setEmail(emailField.getText())
                 .setNumber(phoneField.getText())
@@ -54,31 +63,22 @@ public class AddContactController {
                 .setBirthdayDate(birthday)
                 .setFavorite(false)
                 .build();
-
-        ContactService.add(contact);
+            ContactService.add(contact);
+        }
         App.setRoot("homeView");
     }
 
     @FXML
     private void initialize() {
-        if (test) {
-            mockInputs();
-        }
-        
         setInputValidators();
         TypeChoiceBox.getItems().addAll("Persona Natural", "Empresa");
         TypeChoiceBox.setValue("Persona Natural");
 
         ContactModel contact = ContactService.getContact();
         if (contact != null) {
+            editMode = true;
             setValues(contact);
         }
-    }
-    
-    private void mockInputs() {
-        emailField.insertText(0, "maycol.montalvan@gmail.com");
-        phoneField.insertText(0, "0987654321");
-        birthdayField.insertText(0, "2003-04-14");
     }
     
     private void setInputValidators() {
@@ -88,7 +88,7 @@ public class AddContactController {
             new FormatValidator(birthdayField, "", "Formato de fecha invalida", false),
             new FormatValidator(nameField, "", "", true)
         };
-        validators = validators.ofArray(arrayValidators);
+        validators = MyArrayList.fromArray(arrayValidators);
     }
 
     @FXML
@@ -97,10 +97,16 @@ public class AddContactController {
         // valida si quiere regresar a home sin guardar cambios
     }
 
-    // En modo editar, llena los campos con los valores
-    // del objeto ContactModel pasado como parametro
     private void setValues(ContactModel contact) {
-        
+        nameField.setText(contact.getName());
+        emailField.setText(contact.getEmail());
+        phoneField.setText(contact.getNumber());
+        directionField.setText(contact.getDirection());
+        if (contact.getBirthdayDate() != null) {
+            birthdayField.setText(contact.getBirthdayDate().toString());
+        } else {
+            birthdayField.setText("");
+        }
     }
     
     private void validateInputs() throws IllegalArgumentException {

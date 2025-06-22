@@ -39,6 +39,11 @@ public class DoubleLinkedCircularList<T> implements Iterable<T>{
     
     public boolean delete(T value) {
         if (value == null){return false;}
+        if (head == tail && head.data == value) {
+            head = null;
+            tail = null;
+            return true;
+        }
         DoubleLinkedNode current = head;
         boolean started = false;
         while (!started || current != head) {
@@ -62,6 +67,34 @@ public class DoubleLinkedCircularList<T> implements Iterable<T>{
             started = true;
         }
         return false;
+    }
+    
+    public static DoubleLinkedCircularList fromMyArrayList(MyArrayList arrayList) {
+        DoubleLinkedCircularList circularList = new DoubleLinkedCircularList();
+        for (Object element : arrayList) {
+            circularList.add(element);
+        }
+        return circularList;
+    }
+    
+    public MyArrayList<T> toList() {
+        MyArrayList<T> arrayList = new MyArrayList<>();
+        Iterator<T> it = iterator();
+        while (it.hasNext()){
+            arrayList.add(it.next());
+        }
+        return arrayList;
+    }
+    
+    public void set(T element, T newElement) {
+        DoubleLinkedNode current = head;
+        boolean started = false;
+        while (!started || current != head) {
+            if (current.data.equals(element)) {
+                current.data = newElement;
+            }
+            started = true;
+        }
     }
 
     public int size() {return size;}

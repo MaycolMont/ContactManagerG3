@@ -21,26 +21,41 @@ public class ContactService {
 
     public static DoubleLinkedCircularList<ContactModel> getAll() {return contactList;}
 
-    // Implement
-    public static boolean update(ContactModel contact) {
-        // update to dabase, then to the circular list
-        
-        return false;
+    public static void setUp() {
+        contactList = DoubleLinkedCircularList.fromMyArrayList(Persistance.readContacts());
+        int lastId = 0;
+        for (ContactModel contact : contactList) {
+            if (contact.getId() > lastId) {
+                lastId = contact.getId();
+            }
+            numberList.add(contact.getNumber());
+            emailList.add(contact.getEmail());
+        }
+        ContactModel.setLastId(lastId);
+    }
+    
+    public static void update() {
+        int id = currentContact.getId();
+        for (ContactModel contact : contactList) {
+            if (contact.getId() == id) {
+                contactList.set(contact, currentContact);
+                updateData();
+                break;
+            }
+        }
     }
 
-    // Implement
-    public static boolean delete(ContactModel contact) {
-        // first try to delete from database, then from circular list
-        
-        return false;
+    public static void delete() {
+        contactList.delete(currentContact);
+        updateData();
     }
 
     public static void add(ContactModel contact) {
-        // first add to database, then to the circular list
         if (contact != null) {
             contactList.add(contact);
             numberList.add(contact.getNumber());
             emailList.add(contact.getEmail());
+            updateData();
         }
     }
 
@@ -51,4 +66,9 @@ public class ContactService {
     public static boolean numberExists(String number) {return numberList.contains(number);}
     
     public static boolean emailExists(String email) {return emailList.contains(email);}
+    
+    public static void updateData() {
+        currentContact = null;
+        Persistance.saveList(contactList.toList());
+    }
 }

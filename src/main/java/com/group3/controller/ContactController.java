@@ -4,6 +4,7 @@
  */
 package com.group3.controller;
 
+import dao.ContactService;
 import com.group3.contactmanagerg3.*;
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -53,6 +54,7 @@ public class ContactController {
     @FXML
     private void initialize() {
         contact = ContactService.getContact();
+        System.out.println(contact);
         setContactLayout();
     }
     
@@ -77,7 +79,10 @@ public class ContactController {
         boolean confirmed = ConfirmDialog.show("Ventana de confirmación", 
                 "¿Estás seguro que quieres eliminar este contacto?");
     
-        if (confirmed)switchToHome();
+        if (confirmed){
+            ContactService.delete();
+            switchToHome();
+        }
     }
     
     public void setContactLayout() {
@@ -87,7 +92,7 @@ public class ContactController {
         // Add attributes to the VBox
         attributesBox.getChildren().clear();
 
-        contact.getAttributes().forEach((key, value) -> {
+        contact.mapAttributes().forEach((key, value) -> {
             if (value == null || value.isEmpty()) {
                 return; // Skip empty attributes
             }
