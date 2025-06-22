@@ -1,0 +1,31 @@
+[ {
+  "id" : 1,
+  "name" : "asdfd",
+  "number" : "0987654321",
+  "email" : "",
+  "imagePath" : null,
+  "direction" : "sadfsdf",
+  "favorite" : false,
+  "birthdayDate" : null,
+  "creationDate" : [ 2025, 6, 22 ]
+}, {
+  "id" : 3,
+  "name" : "dffhfg",
+  "number" : "0997654321",
+  "email" : "dfsdf@espol.edu",
+  "imagePath" : null,
+  "direction" : "akjsdjsf",
+  "favorite" : false,
+  "birthdayDate" : null,
+  "creationDate" : [ 2025, 6, 22 ]
+}, {
+  "id" : 4,
+  "name" : "Maycol Nelson",
+  "number" : "0988487874",
+  "email" : "",
+  "imagePath" : null,
+  "direction" : "asdfsd",
+  "favorite" : false,
+  "birthdayDate" : null,
+  "creationDate" : [ 2025, 6, 22 ]
+} ]

@@ -11,6 +11,6 @@ import model.ContactModel;
  * @author maycmont
  */
 
-interface Filter {
+public interface Filter {
     boolean filter(ContactModel contact);
 }

@@ -40,6 +40,7 @@ public class HomeController {
     }
     
     private void addContactLabels() {
+        ContactService.setUp();
         contactsContainer.getChildren().clear();
         
         DoubleLinkedCircularList<ContactModel> contactList = ContactService.getAll();
@@ -57,7 +58,7 @@ public class HomeController {
                 try {
                     switchToContact(contactModel);
                 } catch (IOException ex) {
-                    System.out.println(ex.getMessage());
+                    ex.printStackTrace();
                 }
             });
 

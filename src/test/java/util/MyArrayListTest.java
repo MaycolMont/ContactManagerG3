@@ -59,18 +59,17 @@ public class MyArrayListTest {
         MyArrayList<String> list = new MyArrayList<>();
         list.add(element);
         boolean expected = true;
-        boolean result = list.getLength() == 1 && "Hola".equals(list.get(0));
+        boolean result = list.size() == 1 && "Hola".equals(list.get(0));
         assertEquals(expected, result);
     }
     
     @Test
     public void testAddFromArray() {
         System.out.println("add from array");
-        MyArrayList<String> list = new MyArrayList<>();
         String[] array = {"HOla", "Mundo", "TEst"};
-        list.ofArray(array);
+        MyArrayList list = MyArrayList.fromArray(array);
         int expected = 3;
-        int result = list.getLength();
+        int result = list.size();
         assertEquals(expected, result);
     }
 
@@ -86,7 +85,7 @@ public class MyArrayListTest {
         list.add("una");
         list.add("prueba");
         boolean expected = true;
-        boolean result = list.getLength() == 7 && "es".equals(list.get(4));
+        boolean result = list.size() == 7 && "es".equals(list.get(4));
         assertEquals(expected, result);
     }
 
@@ -102,9 +101,9 @@ public class MyArrayListTest {
         list.add(2);
         list.add(3);
 
-        list.pop(i);
+        list.remove(i);
         boolean expected = true;
-        boolean result = list.getLength() == 2 && list.get(0) == 2 && list.get(1) == 3;
+        boolean result = list.size() == 2 && list.get(0) == 2 && list.get(1) == 3;
         assertEquals(expected, result);
     }
 
@@ -117,9 +116,9 @@ public class MyArrayListTest {
         list.add(2);
         list.add(3);
 
-        list.pop(i);
+        list.remove(i);
         boolean expected = true;
-        boolean result = list.getLength() == 2 && list.get(0) == 1 && list.get(1) == 2;
+        boolean result = list.size() == 2 && list.get(0) == 1 && list.get(1) == 2;
         assertEquals(expected, result);
     }
 

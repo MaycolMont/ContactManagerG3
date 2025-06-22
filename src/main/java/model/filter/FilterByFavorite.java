@@ -19,6 +19,6 @@ public class FilterByFavorite implements Filter {
     
     @Override
     public boolean filter(ContactModel contact) {
-        return contact.isFavorite() == favorite;
+        return contact.getFavorite() == favorite;
     }
 }
