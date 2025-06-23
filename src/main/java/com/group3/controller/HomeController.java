@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.geometry.Pos;
 
 import dao.ContactService;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import model.ContactModel;
 import util.DataStructures.DoubleLinkedCircularList;
 
@@ -36,7 +39,17 @@ public class HomeController {
     @FXML   
     private void switchToContact(ContactModel contact) throws IOException {
         ContactService.setContact(contact);
-        App.setRoot("contactView");
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("carousel.fxml"));
+            Parent root = loader.load();
+
+            CarouselController controller = loader.getController();
+            controller.setIterator(ContactService.getAll().circularIterator(contact));
+
+            App.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     private void addContactLabels() {

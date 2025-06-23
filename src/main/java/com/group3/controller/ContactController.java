@@ -40,8 +40,6 @@ class ConfirmDialog {
  * @author maycmont
  */
 public class ContactController {
-    private ContactModel contact;
-    
     @FXML
     private ImageView profileImage;
     
@@ -52,20 +50,12 @@ public class ContactController {
     private VBox attributesBox;
     
     @FXML
-    private void initialize() {
-        contact = ContactService.getContact();
-        System.out.println(contact);
-        setContactLayout();
-    }
-    
-    @FXML
     private void switchToHome() throws IOException {
         App.setRoot("homeView");
     }
     
     @FXML
-    private void favorite() {
-        
+    private void favorite() throws IOException {
     }
     
     @FXML
@@ -85,9 +75,9 @@ public class ContactController {
         }
     }
     
-    public void setContactLayout() {
+    public void setContact(ContactModel contact) {
         nameLabel.setText(contact.getName());
-        setImageContact();
+        setImageContact(contact);
 
         // Add attributes to the VBox
         attributesBox.getChildren().clear();
@@ -105,7 +95,7 @@ public class ContactController {
         });
     }
     
-    public void setImageContact() {
+    public void setImageContact(ContactModel contact) {
         String imagePath = contact.getImagePath();
         if (imagePath == null) {
             URL defaultUrl = getClass().getResource("/images/default-profile.png");
