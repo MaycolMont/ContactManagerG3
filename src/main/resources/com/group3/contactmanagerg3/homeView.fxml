@@ -21,9 +21,9 @@
         <menus>
           <Menu fx:id="sortMenu" mnemonicParsing="false" text="Ordenar">
             <items>
-              <MenuItem fx:id="nameMenuItem" mnemonicParsing="false" text="Nombre" />
-                  <MenuItem fx:id="birthdayMenuItem" mnemonicParsing="false" text="Cumpleaños" />
-                  <MenuItem fx:id="dateMenuItem" mnemonicParsing="false" text="Fecha Creacion" />
+              <MenuItem fx:id="nameMenuItem" onAction="#sortByName" mnemonicParsing="false" text="Nombre" />
+                  <MenuItem fx:id="birthdayMenuItem" onAction="#sortByBirthday" mnemonicParsing="false" text="Cumpleaños" />
+                  <MenuItem fx:id="dateMenuItem" onAction="#sortByCreationDate" mnemonicParsing="false" text="Fecha Creacion" />
             </items>
           </Menu>
           <Menu fx:id="filterMenu" mnemonicParsing="false" text="Filtrar">

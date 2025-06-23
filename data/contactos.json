@@ -28,4 +28,14 @@
   "favorite" : false,
   "birthdayDate" : null,
   "creationDate" : [ 2025, 6, 22 ]
+}, {
+  "id" : 5,
+  "name" : "adrian",
+  "number" : "0912121212",
+  "email" : "",
+  "imagePath" : null,
+  "direction" : "e23232",
+  "favorite" : false,
+  "birthdayDate" : null,
+  "creationDate" : [ 2025, 6, 23 ]
 } ]
