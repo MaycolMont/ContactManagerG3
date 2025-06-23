@@ -60,7 +60,7 @@ public class ContactService {
     }
 
     public static void setContact(ContactModel contact) {currentContact = contact;}
-
+ 
     public static ContactModel getContact() {return currentContact;}
     
     public static boolean numberExists(String number) {return numberList.contains(number);}

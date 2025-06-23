@@ -106,8 +106,16 @@ public class DoubleLinkedCircularList<T> implements Iterable<T>{
         return new CircularListIterator(this);
     }
     
-    public CircularIterator circularIterator() {
+    public CircularIterator circularIterator(T newHead) {
         if (this.isEmpty()){return null;}
-        return new CircularIterator(this);
+        DoubleLinkedNode current = head;
+        boolean started = false;
+        while (!started || current != head) {
+            if (newHead.equals(current.data)) {
+                return new CircularIterator(current);
+            }
+            current = current.next;
+        }
+        return null;
     }
 }
