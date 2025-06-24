@@ -27,7 +27,7 @@
             <TextField fx:id="directionField" alignment="TOP_CENTER" promptText="Agregar direccion" />
 
             <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="253.0" text="Fecha de nacimiento" />
-            <TextField fx:id="birthdayField" alignment="TOP_CENTER" promptText="DD/MM/YYYY" />
+            <TextField fx:id="birthdayField" alignment="TOP_CENTER" promptText="YYYY-MM-DD" />
 
          </children>
       </VBox>
