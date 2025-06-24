@@ -1,22 +1,12 @@
 [ {
   "id" : 1,
-  "name" : "asdfd",
+  "name" : "Edison",
   "number" : "0987654321",
-  "email" : "",
+  "email" : "ed@espol.edu.ec",
   "imagePath" : null,
-  "direction" : "sadfsdf",
+  "direction" : "",
   "favorite" : false,
-  "birthdayDate" : null,
-  "creationDate" : [ 2025, 6, 22 ]
-}, {
-  "id" : 3,
-  "name" : "dffhfg",
-  "number" : "0997654321",
-  "email" : "dfsdf@espol.edu",
-  "imagePath" : null,
-  "direction" : "akjsdjsf",
-  "favorite" : false,
-  "birthdayDate" : null,
+  "birthdayDate" : [ 2006, 2, 28 ],
   "creationDate" : [ 2025, 6, 22 ]
 }, {
   "id" : 4,
@@ -26,16 +16,26 @@
   "imagePath" : null,
   "direction" : "asdfsd",
   "favorite" : false,
-  "birthdayDate" : null,
+  "birthdayDate" : [ 2009, 6, 19 ],
   "creationDate" : [ 2025, 6, 22 ]
 }, {
   "id" : 5,
-  "name" : "adrian",
+  "name" : "Adrian",
   "number" : "0912121212",
-  "email" : "",
+  "email" : "adria@espol.edu.ec",
   "imagePath" : null,
   "direction" : "e23232",
   "favorite" : false,
-  "birthdayDate" : null,
+  "birthdayDate" : [ 2010, 10, 30 ],
+  "creationDate" : [ 2025, 6, 23 ]
+}, {
+  "id" : 6,
+  "name" : "Victor",
+  "number" : "0912121212",
+  "email" : "victor@espol.edu.ec",
+  "imagePath" : null,
+  "direction" : "",
+  "favorite" : false,
+  "birthdayDate" : [ 2006, 2, 28 ],
   "creationDate" : [ 2025, 6, 23 ]
 } ]

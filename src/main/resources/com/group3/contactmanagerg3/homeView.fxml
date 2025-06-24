@@ -16,7 +16,6 @@
     <!-- Search Bar -->
     <HBox fx:id="searchBar" spacing="5" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
         <TextField fx:id="searchField" prefHeight="25.0" prefWidth="127.0" promptText="Buscar contacto..." styleClass="search-field" />
-        <Button fx:id="searchButton" onAction="#search" prefHeight="25.0" prefWidth="28.0" styleClass="icon-button" text="🔍" />
       <MenuBar fx:id="barraMenuBar" prefHeight="25.0" prefWidth="125.0">
         <menus>
           <Menu fx:id="sortMenu" mnemonicParsing="false" text="Ordenar">
