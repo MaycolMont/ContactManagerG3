@@ -5,12 +5,10 @@ import dao.ContactService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import model.ContactModel;
 import util.DataStructures.MyArrayList;
 
@@ -33,43 +31,33 @@ public class HomeController {
     private MenuItem dateMenuItem;
 
     @FXML
+    private TextField searchField;
+
+    private MyArrayList<ContactModel> allContacts;
+
+    @FXML
     private void initialize() {
         ContactService.setUp();
-        addContactLabels();
+        allContacts = ContactService.getAll().toList();
+        addContactLabels(allContacts);
+
+        // Búsqueda en tiempo real
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterContactsByName(newValue);
+        });
     }
 
     @FXML
-    private void search() {
-        // Implementar búsqueda si es necesario
+    private void switchToAddContact() throws IOException {
+        ContactService.setContact(null);
+        App.setRoot("addContactView");
     }
 
     @FXML
     private void sortByName() {
         MyArrayList<ContactModel> copy = copyContactList();
         copy.sortWithComparator(Comparator.comparing(ContactModel::getName, Comparator.nullsLast(String::compareToIgnoreCase)));
-        showSortedContacts(copy);
-    }
-    
-    @FXML   
-    private void switchToContact(ContactModel contact) throws IOException {
-        ContactService.setContact(contact);
-        try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("carousel.fxml"));
-            Parent root = loader.load();
-
-            CarouselController controller = loader.getController();
-            controller.setIterator(ContactService.getAll().circularIterator(contact));
-
-            App.setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void switchToAddContact() throws IOException {
-        ContactService.setContact(null); // Clear the current contact
-        App.setRoot("addContactView");
+        addContactLabels(copy);
     }
 
     @FXML
@@ -78,37 +66,39 @@ public class HomeController {
         copy.sortWithComparator(Comparator.comparing(
             c -> c.getBirthdayDate() != null ? c.getBirthdayDate().getMonthValue() : 13
         ));
-        showSortedContacts(copy);
+        addContactLabels(copy);
     }
 
     @FXML
     private void sortByCreationDate() {
         MyArrayList<ContactModel> copy = copyContactList();
         copy.sortWithComparator(Comparator.comparing(ContactModel::getCreationDate, Comparator.nullsLast(LocalDate::compareTo)));
-        showSortedContacts(copy);
+        addContactLabels(copy);
     }
 
     private MyArrayList<ContactModel> copyContactList() {
-        MyArrayList<ContactModel> original = ContactService.getAll().toList();
         MyArrayList<ContactModel> copy = new MyArrayList<>();
-        for (ContactModel contact : original) {
+        for (ContactModel contact : allContacts) {
             copy.add(contact);
         }
         return copy;
     }
 
-    private void addContactLabels() {
+    private void addContactLabels(MyArrayList<ContactModel> list) {
         contactsContainer.getChildren().clear();
-        for (ContactModel contactModel : ContactService.getAll()) {
+        for (ContactModel contactModel : list) {
             createContactLabel(contactModel);
         }
     }
 
-    private void showSortedContacts(MyArrayList<ContactModel> sortedList) {
-        contactsContainer.getChildren().clear();
-        for (ContactModel contactModel : sortedList) {
-            createContactLabel(contactModel);
+    private void filterContactsByName(String query) {
+        MyArrayList<ContactModel> filtered = new MyArrayList<>();
+        for (ContactModel contact : allContacts) {
+            if (contact.getName() != null && contact.getName().toLowerCase().contains(query.toLowerCase())) {
+                filtered.add(contact);
+            }
         }
+        addContactLabels(filtered);
     }
 
     private void createContactLabel(ContactModel contactModel) {
@@ -127,5 +117,11 @@ public class HomeController {
         });
 
         contactsContainer.getChildren().add(label);
+    }
+
+    @FXML
+    private void switchToContact(ContactModel contact) throws IOException {
+        ContactService.setContact(contact);
+        App.setRoot("contactView");
     }
 }
