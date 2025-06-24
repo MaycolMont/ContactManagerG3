@@ -8,6 +8,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import model.ContactModel;
 import util.DataStructures.MyArrayList;
 
@@ -36,12 +39,6 @@ public class HomeController {
     }
 
     @FXML
-    private void switchToAddContact() throws IOException {
-        ContactService.setContact(null);
-        App.setRoot("addContactView");
-    }
-
-    @FXML
     private void search() {
         // Implementar búsqueda si es necesario
     }
@@ -51,6 +48,21 @@ public class HomeController {
         MyArrayList<ContactModel> copy = copyContactList();
         copy.sortWithComparator(Comparator.comparing(ContactModel::getName, Comparator.nullsLast(String::compareToIgnoreCase)));
         showSortedContacts(copy);
+    
+    @FXML   
+    private void switchToContact(ContactModel contact) throws IOException {
+        ContactService.setContact(contact);
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("carousel.fxml"));
+            Parent root = loader.load();
+
+            CarouselController controller = loader.getController();
+            controller.setIterator(ContactService.getAll().circularIterator(contact));
+
+            App.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -108,11 +120,5 @@ public class HomeController {
         });
 
         contactsContainer.getChildren().add(label);
-    }
-
-    @FXML
-    private void switchToContact(ContactModel contact) throws IOException {
-        ContactService.setContact(contact);
-        App.setRoot("contactView");
     }
 }

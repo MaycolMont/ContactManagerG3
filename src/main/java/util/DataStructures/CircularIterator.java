@@ -11,8 +11,8 @@ package util.DataStructures;
 public class CircularIterator<T> {
     private DoubleLinkedNode current;
     
-    public CircularIterator(DoubleLinkedCircularList circularList) {
-        current = circularList.head;
+    public CircularIterator(DoubleLinkedNode head) {
+        current = head;
     }
     
     public T next() {

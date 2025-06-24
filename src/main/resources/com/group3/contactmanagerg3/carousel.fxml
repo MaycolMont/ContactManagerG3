@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane fx:id="carousel" 
+            xmlns="http://javafx.com/javafx" 
+            xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.group3.controller.CarouselController">
+    <left><Button text="←" onAction="#handlePrevious" /></left>
+    <center><StackPane fx:id="centerPane" /></center>
+    <right><Button text=">" onAction="#handleNext" /></right>
+</BorderPane>
+
