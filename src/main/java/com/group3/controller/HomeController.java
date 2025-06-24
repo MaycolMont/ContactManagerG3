@@ -48,6 +48,7 @@ public class HomeController {
         MyArrayList<ContactModel> copy = copyContactList();
         copy.sortWithComparator(Comparator.comparing(ContactModel::getName, Comparator.nullsLast(String::compareToIgnoreCase)));
         showSortedContacts(copy);
+    }
     
     @FXML   
     private void switchToContact(ContactModel contact) throws IOException {
@@ -63,6 +64,12 @@ public class HomeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void switchToAddContact() throws IOException {
+        ContactService.setContact(null); // Clear the current contact
+        App.setRoot("addContactView");
     }
 
     @FXML
