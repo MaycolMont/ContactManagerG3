@@ -9,12 +9,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import model.ContactModel;
+import util.DataStructures.MyArrayList;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 public class HomeController {
 
@@ -49,28 +48,34 @@ public class HomeController {
 
     @FXML
     private void sortByName() {
-        List<ContactModel> list = new ArrayList<>();
-        ContactService.getAll().forEach(list::add);
-        list.sort(Comparator.comparing(ContactModel::getName, Comparator.nullsLast(String::compareToIgnoreCase)));
-        showSortedContacts(list);
+        MyArrayList<ContactModel> copy = copyContactList();
+        copy.sortWithComparator(Comparator.comparing(ContactModel::getName, Comparator.nullsLast(String::compareToIgnoreCase)));
+        showSortedContacts(copy);
     }
 
     @FXML
     private void sortByBirthday() {
-        List<ContactModel> list = new ArrayList<>();
-        ContactService.getAll().forEach(list::add);
-        list.sort(Comparator.comparing(
+        MyArrayList<ContactModel> copy = copyContactList();
+        copy.sortWithComparator(Comparator.comparing(
             c -> c.getBirthdayDate() != null ? c.getBirthdayDate().getMonthValue() : 13
         ));
-        showSortedContacts(list);
+        showSortedContacts(copy);
     }
 
     @FXML
     private void sortByCreationDate() {
-        List<ContactModel> list = new ArrayList<>();
-        ContactService.getAll().forEach(list::add);
-        list.sort(Comparator.comparing(ContactModel::getCreationDate, Comparator.nullsLast(LocalDate::compareTo)));
-        showSortedContacts(list);
+        MyArrayList<ContactModel> copy = copyContactList();
+        copy.sortWithComparator(Comparator.comparing(ContactModel::getCreationDate, Comparator.nullsLast(LocalDate::compareTo)));
+        showSortedContacts(copy);
+    }
+
+    private MyArrayList<ContactModel> copyContactList() {
+        MyArrayList<ContactModel> original = ContactService.getAll().toList();
+        MyArrayList<ContactModel> copy = new MyArrayList<>();
+        for (ContactModel contact : original) {
+            copy.add(contact);
+        }
+        return copy;
     }
 
     private void addContactLabels() {
@@ -80,7 +85,7 @@ public class HomeController {
         }
     }
 
-    private void showSortedContacts(List<ContactModel> sortedList) {
+    private void showSortedContacts(MyArrayList<ContactModel> sortedList) {
         contactsContainer.getChildren().clear();
         for (ContactModel contactModel : sortedList) {
             createContactLabel(contactModel);
